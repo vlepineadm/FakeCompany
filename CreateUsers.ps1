@@ -7,7 +7,7 @@
 ###########################################################
 
 $LocalDomain = "corp.priv"
-$ExternalDomain = "corporate.priv"
+$ExternalDomain = "corporate.com"
 $Password = "Azerty1"
 
 ## Modules ##
@@ -63,51 +63,69 @@ foreach ($User in $Content)
     ## DisplayName ##
     $DisplayName = $User.('Surname')+" "+$User.('GivenName')
 
+    ## Initials ##
+    $Initials = $User.SurName.substring(0,1).toupper()+$User.GivenName.substring(0,1).toupper()
 
-    Write-Host $Name ## DOE Jane
-    Write-Host $GivenName ## Jane --
-    Write-Host $SurName ## DOE --
-    Write-Host $User.('Path') ## OU=Paris,OU=Sites,OU=CORP,DC=corp,DC=priv --
-    Write-Host $Password ## System.Security.SecureString
-    Write-Host $Email ## jane.doe@corporate.com
-    Write-Host $SamAccountName ## jane.doe
-    Write-Host $UserPrincipalName ## DOE Jane
-    Write-Host $DisplayName ## DOE Jane
-    Write-Host $User.('Company') ## Corporate --
-    Write-Host $User.('Department') ## Direction --
-    Write-Host $User.('Title') ## Chief executive officer --
-    Write-Host $User.('Office') ## 110 --
-    Write-Host $User.('OfficePhone') ## +33 1 60 84 00 26 --
-    Write-Host $User.('PostalCode') ## 75008 --
-    Write-Host $User.('City') ## Paris --
-    Write-Host $User.('StreetAddress') ## 55 Rue du Faubourg Saint-Honoré --
-    Write-Host $User.('Description') ## Corporate User --
-    Write-Host $User.('Manager') ## Blank --
-    Write-Host $User.('Country') ## FR --
+    Write-Debug $Name ## DOE Jane
+    Write-Debug $GivenName ## Jane --
+    Write-Debug $SurName ## DOE --
+    Write-Debug $User.('Path') ## OU=Paris,OU=Sites,OU=CORP,DC=corp,DC=priv --
+    Write-Debug $Password ## System.Security.SecureString
+    Write-Debug $Email ## jane.doe@corporate.com
+    Write-Debug $SamAccountName ## jane.doe
+    Write-Debug $UserPrincipalName ## DOE Jane
+    Write-Debug $DisplayName ## DOE Jane
+    Write-Debug $User.('Company') ## Corporate --
+    Write-Debug $User.('Department') ## Direction --
+    Write-Debug $User.('Title') ## Chief executive officer --
+    Write-Debug $User.('Office') ## 110 --
+    Write-Debug $User.('OfficePhone') ## +33 1 60 84 00 26 --
+    Write-Debug $User.('PostalCode') ## 75008 --
+    Write-Debug $User.('City') ## Paris --
+    Write-Debug $User.('StreetAddress') ## 55 Rue du Faubourg Saint-Honoré --
+    Write-Debug $User.('Description') ## Corporate User --
+    Write-Debug $User.('Manager') ## Blank --
+    Write-Debug $User.('Country') ## FR --
 
-    New-ADuser -Name $Name `
-    -GivenName $User.('GivenName') `
-    -Surname $User.('Surname') `
-    -Path $User.('Path') `
-    -AccountPassword $Password `
-    -EmailAddress $Email `
-    -SamAccountName $SamAccountName `
-    -UserPrincipalName $UserPrincipalName `
-    -DisplayName $DisplayName `
-    -Company $User.('Company') `
-    -Department $User.('Department') `
-    -Title $User.('Title') `
-    -Office $User.('Office') `
-    -OfficePhone $User.('OfficePhone') `
-    -PostalCode $User.('PostalCode') `
-    -City $User.('City') `
-    -StreetAddress $User.('StreetAddress') `
-    -Description $User.('Description') `
-    -Manager $User.('Manager') `
-    -Country $User.('Country') `
-    -Enabled $true
+
+    $ADUserExist = $(try {Get-ADUser $SamAccountName} catch {$null})
+    If ($ADUserExist) 
+    {
+        Write-Host "The user already exists"
+    } 
+    else 
+    {
+        New-ADuser -Name $Name `
+        -GivenName $User.('GivenName') `
+        -Surname $User.('Surname') `
+        -Path $User.('Path') `
+        -AccountPassword $Password `
+        -EmailAddress $Email `
+        -SamAccountName $SamAccountName `
+        -UserPrincipalName $UserPrincipalName `
+        -DisplayName $DisplayName `
+        -Company $User.('Company') `
+        -Department $User.('Department') `
+        -Title $User.('Title') `
+        -Office $User.('Office') `
+        -OfficePhone $User.('OfficePhone') `
+        -PostalCode $User.('PostalCode') `
+        -City $User.('City') `
+        -StreetAddress $User.('StreetAddress') `
+        -Description $User.('Description') `
+        -Country $User.('Country') `
+        -Initials $Initials `
+        -Enabled $true
+    
+        If ($User.('Manager')) 
+        {
+            Set-ADUser -Identity $SamAccountName `
+            -Manager $User.('Manager') 
+        }
+    }
+
 }
 
 
 
-Add-ADGroupMember -Identity $_."group" -Members $_."samaccountname";
+#Add-ADGroupMember -Identity $_."group" -Members $_."samaccountname";
