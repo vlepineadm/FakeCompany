@@ -1,17 +1,19 @@
-###########################################################
-#  This script allows you to create active directory      #
-#  users by using a CSV file, add specific group and      #
-#  set specific password  and OU for every user.          #
-#                                                         #
-# created on 2016/07/18 by Daniele Managò                 #  
-###########################################################
 
 $LocalDomain = "corp.priv"
 $ExternalDomain = "corporate.com"
 $Password = "Azerty1"
 
-## Modules ##
-import-module activedirectory
+
+# Import du module Active Directory
+Try 
+{
+    Import-Module ActiveDirectory
+}
+Catch [FileNotFoundException]
+{
+    
+}
+
 
 ## Function ##
 function Remove-StringLatinCharacters
@@ -34,6 +36,9 @@ function FormattingVar
     return ,$String
 }
 
+
+
+## Beginning of the script ##
 $Content = Import-Csv -Path "C:\new_Users.csv" 
 foreach ($User in $Content)
 {
@@ -115,17 +120,19 @@ foreach ($User in $Content)
         -Description $User.('Description') `
         -Country $User.('Country') `
         -Initials $Initials `
-        -Enabled $true
+        -Enabled $true `
+        -CannotChangePassword $true `
+        -PasswordNeverExpires $true
     
         If ($User.('Manager')) 
         {
             Set-ADUser -Identity $SamAccountName `
             -Manager $User.('Manager') 
         }
+        Write-Host "The user was created"
     }
-
 }
-
+## Ending of the script ##
 
 
 #Add-ADGroupMember -Identity $_."group" -Members $_."samaccountname";
