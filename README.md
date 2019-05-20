@@ -1,6 +1,15 @@
 # FakeCompany
 
-Create OU, Users and Groups
+<p>Create OU, Users and Groups</p>
 
-Users : 75
-Groups : 36
+<ul>
+    <li>Users : 75</li>
+    <li>Groups : 36</li>
+    <li>Computers :
+        <ul>
+            <li>Desktop : 66</li>
+            <li>Laptop : 9</li>
+        </ul>
+    </li>
+</ul>
+
