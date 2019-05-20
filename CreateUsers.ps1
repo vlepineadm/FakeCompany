@@ -1,19 +1,18 @@
+# Import du module Active Directory
+#Try 
+#{
+#    Import-Module ActiveDirectory
+#}
+#Catch [FileNotFoundException]
+#{
+#    
+#}
+#Add-ADGroupMember -Identity $_."group" -Members $_."samaccountname";
 
+## Global variables ##
 $LocalDomain = "corp.priv"
 $ExternalDomain = "corporate.com"
 $Password = "Azerty1"
-
-
-# Import du module Active Directory
-Try 
-{
-    Import-Module ActiveDirectory
-}
-Catch [FileNotFoundException]
-{
-    
-}
-
 
 ## Function ##
 function Remove-StringLatinCharacters
@@ -35,7 +34,6 @@ function FormattingVar
     $String = $String.ToLower()
     return ,$String
 }
-
 
 
 ## Beginning of the script ##
@@ -89,14 +87,14 @@ foreach ($User in $Content)
     Write-Debug $User.('City') ## Paris --
     Write-Debug $User.('StreetAddress') ## 55 Rue du Faubourg Saint-Honoré --
     Write-Debug $User.('Description') ## Corporate User --
-    Write-Debug $User.('Manager') ## Blank --
+    Write-Debug $User.('Manager') ## CN=Administrator,CN=Users,DC=corp,DC=priv --
     Write-Debug $User.('Country') ## FR --
 
 
     $ADUserExist = $(try {Get-ADUser $SamAccountName} catch {$null})
     If ($ADUserExist) 
     {
-        Write-Host "The user already exists"
+        Write-Host "The user $Name already exists"
     } 
     else 
     {
@@ -129,10 +127,7 @@ foreach ($User in $Content)
             Set-ADUser -Identity $SamAccountName `
             -Manager $User.('Manager') 
         }
-        Write-Host "The user was created"
+        Write-Host "The user $Name was created"
     }
 }
 ## Ending of the script ##
-
-
-#Add-ADGroupMember -Identity $_."group" -Members $_."samaccountname";
