@@ -13,5 +13,5 @@
     </li>
 </ul>
 
-<h1>Company scheme</h1>
-<img src="https://gitlab.labvl.net/vlepineadm/fakecompany/raw/master/Schema_Entreprise.png" alt="Company scheme" >
+<h2>Company scheme</h2>
+<img src="https://gitlab.labvl.net/vlepineadm/fakecompany/raw/master/FakeCompany_Schema.jpg" alt="Company scheme" >
