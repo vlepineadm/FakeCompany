@@ -2,11 +2,11 @@ Function FakeCompanyUsers
 {
 <#
 .SYNOPSIS
-	This function recovers the value of an Excel user file and process them and return the information in a table.
+	This function allows you to create Active Directory users from CSV file.
 .DESCRIPTION
-	This function recovers the value of an Excel user file and process them and return the information in a table.
+	This function allows you to create Active Directory users from CSV file.
 .PARAMETER FilePath
-	Specify the Excel file containing the user information.
+	Specify the path of a CSV file containing user information.
 .EXAMPLE
     PS C:\> FakeCompanyUsers -CSVFile C:\new_Users.csv
  
@@ -39,7 +39,7 @@ Function FakeCompanyUsers
     ## Global variables ##
     $LocalDomain = "corp.priv"
     $ExternalDomain = "corporate.com"
-    $Password = "Azerty1"
+    $Password = 'P@ssW0rd!'
 
     ## Function ##
     function Remove-StringLatinCharacters
@@ -63,8 +63,9 @@ Function FakeCompanyUsers
     }
 
 
-    ## Beginning of the script ##
     $Content = Import-Csv -Path "$CSVFile" 
+
+    ### Creating Users ###
     foreach ($User in $Content)
     {
         ## GivenName ##
@@ -182,4 +183,3 @@ Function FakeCompanyUsers
         }
     }
 }
-## Ending of the script ##
