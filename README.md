@@ -1,14 +1,14 @@
 # FakeCompany
 
-<p>Create OU, Users and Groups</p>
+<p>This fuction create OU, Groups, Users and Computers</p>
 
 <ul>
     <li>Users : 75</li>
     <li>Groups : 36</li>
     <li>Computers :
         <ul>
-            <li>Desktop : 66</li>
-            <li>Laptop : 9</li>
+            <li>Desktops : 66</li>
+            <li>Laptops : 9</li>
         </ul>
     </li>
 </ul>
