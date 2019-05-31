@@ -23,7 +23,7 @@
             [System.String]$CSVFile
         )
 
-        ## Global variables ##
+        ## Global variables for create FakeCompany ##
 
         # Global Groups variables #
         $GroupCategory = "Security"
