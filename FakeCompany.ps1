@@ -90,7 +90,7 @@
                         Write-Verbose $($Content.field03)
 
                         ## If the OU exist
-                        $ADOUExist = $(try {Get-ADOrganizationalUnit -Filter {Name -like $Name} -SearchBase "DC=corp,DC=priv"} catch {$null})
+                        $ADOUExist = $(try {Get-ADOrganizationalUnit -Filter {Name -like $Name} -SearchBase "$($Content.field03)"} catch {$null})
                         If ($ADOUExist) 
                         {
                             Write-Host "The OU $Name already exists"
