@@ -32,7 +32,7 @@
         # Global Users variables #
         $LocalDomain = "corp.priv"
         $ExternalDomain = "corporate.com"
-        $Password = 'P@ssW0rd!'
+        $Password = "Password01!"
 
         ## Global Computers variables ##
         $Domain = $LocalDomain
@@ -155,7 +155,7 @@
                         $Name = $SurName+" "+$GivenName+" ("+$SamAccountName+")"
 
                         ## Password ##
-                        $Password = ConvertTo-SecureString -AsPlainText $Password -force
+                        $Password = (ConvertTo-SecureString $Password -AsPlainText -Force)
 
                         ## Email ##
                         $Email = $SamAccountName+"@"+$ExternalDomain
