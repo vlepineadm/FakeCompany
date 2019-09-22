@@ -229,7 +229,8 @@
                             -Initials $Initials `
                             -Enabled $true `
                             -CannotChangePassword $true `
-                            -PasswordNeverExpires $true
+                            -PasswordNeverExpires $true `
+                            -ChangePasswordAtLogon $false
                         
                             If ($Content.field14) 
                             {
