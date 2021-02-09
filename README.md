@@ -1,5 +1,9 @@
 # FakeCompany
 
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-3D76C2.svg)](https://github.com/vlepineadm/FakeCompany.git)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-6C488A.svg)](https://gitlab.labvl.net/vlepineadm/fakecompany.git)
+[![version](https://img.shields.io/badge/version-1.0.0-blue)](#)
+
 <p style="text-align: justify;">While fessing tests in my lab, I got tired of creating users User01 groups, etc ... So I decided to create a script Powershell to create a similar structure to that of a company, allowing me to automatically create OUs, users, groups, computers, from a CSV file.</p>
 
 <p style="text-align: justify;">This powershell function creates the Active Directory infrastructure of a fake enterprise by creating OUs, groups, users, computers.</p>
