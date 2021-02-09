@@ -20,7 +20,7 @@
 </ul>
 
 <h2>Company scheme</h2>
-<img src="https://gitlab.labvl.net/vlepineadm/fakecompany/raw/master/FakeCompany_Schema.jpg" alt="Company scheme" >
+<img src="https://github.com/vlepineadm/FakeCompany/blob/master/FakeCompany_Schema.jpg" alt="Company scheme" >
 
 
 <h2>Working</h2>
